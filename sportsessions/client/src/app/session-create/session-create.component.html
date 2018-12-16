@@ -1,0 +1,52 @@
+<div class="button-row">
+    <a mat-raised-button color="primary" [routerLink]="['/sessions']"><mat-icon>Sessions</mat-icon></a>
+  </div>
+<div class="container">
+  <form name="sessionForm" (ngSubmit)="f.form.valid && addSession()" #f="ngForm" novalidate>
+      <div class="form-group">
+          <label for="start_date">Start Date</label>
+          <input type="date" class="form-control" name="start_date" [(ngModel)]="start_date" #startDate="ngModel" [ngClass]="{ 'is-invalid': f.submitted && startDate.invalid }" required />
+          <div *ngIf="f.submitted && startDate.invalid" class="invalid-feedback">
+              <div *ngIf="startDate.errors.required">Start Date is required</div>
+          </div>
+      </div>
+      <div class="form-group">
+          <label for="end_date">End Date</label>
+          <input type="date" class="form-control" name="end_date" [(ngModel)]="end_date" #endDate="ngModel" [ngClass]="{ 'is-invalid': f.submitted && endDate.invalid }" required />
+          <div *ngIf="f.submitted && endDate.invalid" class="invalid-feedback">
+              <div *ngIf="endDate.errors.required">End Date is required</div>
+          </div>
+      </div>
+      <div class="form-group">
+          <label for="session_day">Session Day</label>
+          <input type="text" class="form-control" name="session_day" value= "{{start_date|date: 'EEEE'}}" [(ngModel)]="session_day" #sessionDay="ngModel" [ngClass]="{ 'is-invalid': f.submitted && sessionDay.invalid }" required />
+          <div *ngIf="f.submitted && sessionDay.invalid" class="invalid-feedback">
+              <div *ngIf="sessionDay.errors.required">Session Day is required</div>
+          </div>
+      </div>
+      <div class="form-group">
+          <label for="session_time">Session Time</label>
+          <input type="text" class="form-control" name="session_time" [(ngModel)]="session_time" #sessionTime="ngModel" [ngClass]="{ 'is-invalid': f.submitted && sessionTime.invalid }" required />
+          <div *ngIf="f.submitted && sessionTime.invalid" class="invalid-feedback">
+              <div *ngIf="sessionTime.errors.required">Session Time is required</div>
+          </div>
+      </div>
+      <div class="form-group">
+              <label for="level">Level</label>
+              <input type="text" class="form-control" name="level" [(ngModel)]="level" #levelNumber="ngModel" [ngClass]="{ 'is-invalid': f.submitted && levelNumber.invalid }" required />
+              <div *ngIf="f.submitted && levelNumber.invalid" class="invalid-feedback">
+                  <div *ngIf="levelNumber.errors.required">Level is required</div>
+              </div>
+      </div>
+      <div class="form-group">
+          <label for="instructor">Instructor</label>
+          <input type="text" class="form-control" name="instructor" [(ngModel)]="instructor" #instructorName="ngModel" [ngClass]="{ 'is-invalid': f.submitted && instructorName.invalid }" required />
+          <div *ngIf="f.submitted && instructorName.invalid" class="invalid-feedback">
+              <div *ngIf="instructorName.errors.required">Instructor Name is required</div>
+          </div>
+      </div>
+      <div class="form-group">
+          <button class="btn btn btn-success">Add</button>
+      </div>
+  </form>
+</div>

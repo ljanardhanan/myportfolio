@@ -1,0 +1,80 @@
+<div class="button-row">
+  <a mat-raised-button color="primary" [routerLink]="['/session-create']"><mat-icon>Add Session</mat-icon></a>
+  <a mat-raised-button color="primary" [routerLink]="['/student-create']"><mat-icon>Add Student</mat-icon></a>
+</div>
+<hr>
+<div class="example-container mat-elevation-z8">
+    <mat-table [dataSource]="dataSource" matSort>
+  
+      <!--- Note that these columns can be defined in any order.
+            The actual rendered columns are set as a property on the row definition" -->
+  
+      <!-- Title Column -->
+      <ng-container matColumnDef="level">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Level </mat-header-cell>>
+        <mat-cell *matCellDef="let element"> {{element.level}} </mat-cell>>
+      </ng-container>
+
+      <ng-container matColumnDef="session_day">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Session Day </mat-header-cell>>
+        <mat-cell *matCellDef="let element" class="isbn-col"> {{element.session_day}} </mat-cell>>
+      </ng-container>
+  
+      <!-- Title Column -->
+      <ng-container matColumnDef="session_time">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Session Time </mat-header-cell>>
+        <mat-cell *matCellDef="let element"> {{element.session_time}} </mat-cell>>
+      </ng-container>
+
+      <ng-container matColumnDef="start_date">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> start Date </mat-header-cell>h>
+        <mat-cell *matCellDef="let element"> {{element.start_date}} </mat-cell>>
+      </ng-container>
+
+      <ng-container matColumnDef="end_date">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> End Date </mat-header-cell>>
+        <mat-cell *matCellDef="let element"> {{element.end_date}} </mat-cell>>
+      </ng-container>
+
+      <ng-container matColumnDef="instructor">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Instructor </mat-header-cell>>
+        <mat-cell *matCellDef="let element"> {{element.instructor}} </mat-cell>>
+      </ng-container>
+
+      <ng-container matColumnDef="student">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Students </mat-header-cell>>
+        <mat-cell *matCellDef="let element"> 
+            <!-- {{element.students}} -->
+            <mat-accordion>
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-description>
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+                <tr mat-cell *ngFor="let student of element.students">
+                    {{student.name}} 
+                </tr>
+                <!-- </mat-cell>-->
+            </mat-expansion-panel>
+        </mat-accordion>
+        </mat-cell>>
+      </ng-container>
+
+    
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;" >
+      <!--[routerLink]="['/book-details/', row._id]"-->
+      </mat-row>
+    
+    </mat-table>
+      <!-- <div class="example-no-results"
+       [style.display]="dataSource.renderedData.length == 0 ? '' : 'none'">
+    No accounts found matching filter.
+  </div> 
+        substitute for length variable below: "(_sessionService.sessions | async)?.length"
+        -->
+
+        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+  </div>
+  
